@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" style="-fx-background-color: #f5f5f5;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.student.hostel.studenthostelfee.PrimaryController">
+
+    <padding><Insets bottom="15" left="15" right="15" top="15" /></padding>
+
+    <!-- TITLE -->
+    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="University Hostel Fee Calculator" />
+    <Separator />
+
+    <!-- TWO COLUMNS: Left = Input, Right = Policy -->
+    <HBox spacing="15">
+
+        <!-- ========== LEFT: INPUT FORM ========== -->
+        <VBox prefWidth="320" spacing="8" style="-fx-background-color: white;                      -fx-border-color: #cccccc;                      -fx-padding: 12;">
+
+            <Label style="-fx-font-weight: bold;" text="-- Student Details --" />
+
+            <Label text="Student Name:" />
+            <TextField fx:id="nameField" promptText="Enter student name" />
+
+            <Label text="Number of Months Staying:" />
+            <TextField fx:id="monthsField" promptText="e.g. 6" />
+
+            <Label text="Room Type:" />
+            <HBox spacing="15">
+                <RadioButton fx:id="standardRadio" selected="true" text="Standard Room">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="roomGroup" />
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="deluxeRadio" text="Deluxe Room " toggleGroup="$roomGroup" />
+            </HBox>
+
+            <Label text="Electricity Usage (kWh):" />
+            <TextField fx:id="electricityField" promptText="e.g. 120" />
+
+            <Label text="Water Charges (RM/month):" />
+            <TextField fx:id="waterField" promptText="e.g. 15.00" />
+
+            <Label text="Internet Subscription:" />
+            <CheckBox fx:id="internetCheckBox" text="Yes — RM50/month" />
+
+            <Label text="Security Deposit (RM):" />
+            <TextField fx:id="depositField" promptText="e.g. 500.00" />
+
+            <Separator />
+
+            <HBox spacing="10">
+                <Button onAction="#handleCalculate" style="-fx-background-color: #2c5f8a;                                -fx-text-fill: white;                                -fx-font-weight: bold;" text="Calculate Fee" />
+                <Button onAction="#handleClear" text="Clear" />
+            </HBox>
+
+        </VBox>
+
+        <!-- ========== RIGHT: POLICY + RESULTS ========== -->
+        <VBox prefWidth="300" spacing="10">
+
+            <!-- Charges & Policy Box -->
+            <VBox spacing="5" style="-fx-background-color: #fffde7;                          -fx-border-color: #f9a825;                          -fx-padding: 12;">
+
+                <Label style="-fx-font-weight: bold; -fx-font-size: 13px;" text="Charges and Policy" />
+                <Separator />
+
+                <Label style="-fx-font-weight: bold;" text="Room Rates:" />
+                <Label text="  Standard Room = RM 300.00 / month" />
+                <Label text="  Deluxe Room   = RM 450.00 / month" />
+
+                <Label style="-fx-font-weight: bold;" text="Utility Rates:" />
+                <Label text="  Electricity   = RM 0.25 per kWh" />
+                <Label text="  Internet      = RM 50.00 / month (if selected)" />
+                <Label text="  Water         = as entered (RM/month)" />
+
+                <Label style="-fx-font-weight: bold;" text="Discount Policy:" />
+                <Label text="  5% discount if staying MORE than 6 months" />
+
+                <Label style="-fx-font-weight: bold;" text="Deposit Policy:" />
+                <Label text="  One-time payment, fully refundable" />
+                <Label text="  NOT included in total fee calculation" />
+
+            </VBox>
+
+            <!-- Results Box -->
+            <VBox spacing="6" style="-fx-background-color: white;                          -fx-border-color: #cccccc;                          -fx-padding: 12;">
+
+                <Label style="-fx-font-weight: bold;" text="-- Fee Summary --" />
+                <Separator />
+
+                <HBox spacing="10">
+                    <Label prefWidth="195" text="Total Monthly Charges:" />
+                    <Label fx:id="monthlyLabel" text="RM 0.00" />
+                </HBox>
+                <HBox spacing="10">
+                    <Label prefWidth="195" text="Total Charges (Entire Stay):" />
+                    <Label fx:id="totalLabel" text="RM 0.00" />
+                </HBox>
+                <HBox spacing="10">
+                    <Label prefWidth="195" text="Discount Amount:" />
+                    <Label fx:id="discountLabel" text="RM 0.00" />
+                </HBox>
+
+                <Separator />
+
+                <HBox spacing="10">
+                    <Label prefWidth="195" style="-fx-font-weight: bold;" text="Final Payable Amount:" />
+                    <Label fx:id="finalLabel" style="-fx-font-weight: bold;                                   -fx-text-fill: #c0392b;" text="RM 0.00" />
+                </HBox>
+
+                <Separator />
+
+                <HBox spacing="10">
+                    <Label prefWidth="195" text="Security Deposit (Refundable):" />
+                    <Label fx:id="depositResultLabel" text="RM 0.00" />
+                </HBox>
+
+            </VBox>
+
+        </VBox>
+    </HBox>
+
+    <!-- MESSAGE / ERROR BAR -->
+    <Label fx:id="messageLabel" style="-fx-text-fill: #333333;" text="Ready — fill in the details and click Calculate." />
+
+</VBox>
